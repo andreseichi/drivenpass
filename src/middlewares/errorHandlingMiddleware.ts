@@ -10,5 +10,8 @@ export const errorHandlingMiddleware = (
   if (error.type === "USER_ALREADY_EXISTS")
     return res.status(409).send({ message: error.message });
 
+  if (error.type === "INVALID_LOGIN")
+    return res.status(401).send({ message: error.message });
+
   return res.sendStatus(500);
 };
