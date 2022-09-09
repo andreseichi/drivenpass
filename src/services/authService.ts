@@ -1,11 +1,11 @@
 import { hashSync } from "bcrypt";
 
 import { insert } from "../repositories/authRepository";
+
 import { UserInsertData } from "../types/users";
 
 export async function createUser(user: UserInsertData) {
   const userData = { ...user, password: hashSync(user.password, 10) };
-
   const result = await insert(userData);
 
   if (!result) {
@@ -14,6 +14,4 @@ export async function createUser(user: UserInsertData) {
       message: "User already exists",
     };
   }
-
-  return result;
 }
