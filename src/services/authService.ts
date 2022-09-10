@@ -35,6 +35,6 @@ export async function signinService(user: UserInsertData) {
     };
   }
 
-  const token = generateAccessToken(userDB.email);
+  const token = generateAccessToken({ id: userDB.id, email: userDB.email });
   return token;
 }
