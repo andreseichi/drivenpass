@@ -1,6 +1,7 @@
 import { Request, Response } from "express";
 import {
   createCredentialService,
+  deleteCredentialService,
   getCredentialService,
   getUserCredentialsService,
 } from "../services/credentialService";
@@ -40,4 +41,15 @@ export async function getCredential(req: Request, res: Response) {
   const credential = await getCredentialService(Number(id), user.email);
 
   return res.status(200).send({ credential });
+}
+
+export async function deleteCredential(req: Request, res: Response) {
+  const payload: PayloadToken = res.locals.payload;
+  const { user } = payload;
+
+  const { id } = req.params;
+
+  await deleteCredentialService(Number(id), user.email);
+
+  return res.status(200).send({ message: `Credential deleted` });
 }

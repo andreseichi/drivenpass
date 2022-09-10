@@ -1,6 +1,7 @@
 import { Router } from "express";
 import {
   createCredential,
+  deleteCredential,
   getCredential,
   getUserCredentials,
 } from "../controllers/credentialController";
@@ -34,6 +35,13 @@ credentialRouter.get(
   validateHeaderSchema(tokenSchema),
   isAuthenticated,
   getCredential
+);
+
+credentialRouter.delete(
+  "/credentials/:id",
+  validateHeaderSchema(tokenSchema),
+  isAuthenticated,
+  deleteCredential
 );
 
 export { credentialRouter };

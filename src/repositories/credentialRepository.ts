@@ -50,3 +50,31 @@ export async function findById(id: number, email: string) {
 
   return result;
 }
+
+export async function remove(id: number, email: string) {
+  const result = await prisma.credentials
+    .findUnique({
+      include: {
+        User: {
+          select: {
+            email: true,
+          },
+        },
+      },
+      where: {
+        id,
+      },
+    })
+    .then((credential) => {
+      if (credential?.User?.email === email) {
+        return prisma.credentials.delete({
+          where: {
+            id,
+          },
+        });
+      }
+      return null;
+    });
+
+  return result;
+}

@@ -2,6 +2,7 @@ import {
   findByEmail,
   findById,
   insert,
+  remove,
 } from "../repositories/credentialRepository";
 import { decrypt, encrypt } from "../utils/hash";
 
@@ -55,4 +56,14 @@ export async function getCredentialService(id: number, email: string) {
   };
 
   return credentialData;
+}
+
+export async function deleteCredentialService(id: number, email: string) {
+  const result = await remove(id, email);
+  if (!result) {
+    throw {
+      type: "NOT_FOUND",
+      message: "Credential not found",
+    };
+  }
 }
