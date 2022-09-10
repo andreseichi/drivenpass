@@ -1,12 +1,14 @@
 import { Request, Response } from "express";
 import {
   createCredentialService,
+  getCredentialService,
   getUserCredentialsService,
 } from "../services/credentialService";
 import { CredentialData, CredentialInsertData } from "../types/credential";
+import { PayloadToken } from "../types/payload";
 
 export async function createCredential(req: Request, res: Response) {
-  const payload = res.locals.payload;
+  const payload: PayloadToken = res.locals.payload;
   const { user } = payload;
   const { body }: Record<string, CredentialData> = res.locals;
 
@@ -21,10 +23,21 @@ export async function createCredential(req: Request, res: Response) {
 }
 
 export async function getUserCredentials(req: Request, res: Response) {
-  const payload = res.locals.payload;
+  const payload: PayloadToken = res.locals.payload;
   const { user } = payload;
 
   const credentials = await getUserCredentialsService(user.email);
 
   return res.status(200).send({ credentials });
+}
+
+export async function getCredential(req: Request, res: Response) {
+  const payload: PayloadToken = res.locals.payload;
+  const { user } = payload;
+
+  const { id } = req.params;
+
+  const credential = await getCredentialService(Number(id), user.email);
+
+  return res.status(200).send({ credential });
 }

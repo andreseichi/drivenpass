@@ -1,4 +1,8 @@
-import { findByEmail, insert } from "../repositories/credentialRepository";
+import {
+  findByEmail,
+  findById,
+  insert,
+} from "../repositories/credentialRepository";
 import { decrypt, encrypt } from "../utils/hash";
 
 import { CredentialInsertData } from "../types/credential";
@@ -30,4 +34,25 @@ export async function getUserCredentialsService(email: string) {
   });
 
   return credentialsData;
+}
+
+export async function getCredentialService(id: number, email: string) {
+  const credential = await findById(id, email);
+  if (!credential) {
+    throw {
+      type: "NOT_FOUND",
+      message: "Credential not found",
+    };
+  }
+
+  const passwordDecrypted = decrypt(credential.password);
+  const credentialData = {
+    id: credential.id,
+    title: credential.title,
+    url: credential.url,
+    username: credential.username,
+    password: passwordDecrypted,
+  };
+
+  return credentialData;
 }

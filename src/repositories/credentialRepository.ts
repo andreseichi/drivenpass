@@ -26,3 +26,27 @@ export async function findByEmail(email: string) {
 
   return result;
 }
+
+export async function findById(id: number, email: string) {
+  const result = await prisma.credentials
+    .findUnique({
+      include: {
+        User: {
+          select: {
+            email: true,
+          },
+        },
+      },
+      where: {
+        id,
+      },
+    })
+    .then((credential) => {
+      if (credential?.User?.email === email) {
+        return credential;
+      }
+      return null;
+    });
+
+  return result;
+}
