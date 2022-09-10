@@ -16,7 +16,7 @@ import { tokenSchema } from "../schemas/tokenSchema";
 const secureNoteRouter = Router();
 
 secureNoteRouter.post(
-  "/securenotes/create",
+  "/securenote/create",
   validateSchema(secureNoteSchema),
   validateHeaderSchema(tokenSchema),
   isAuthenticated,
@@ -31,14 +31,14 @@ secureNoteRouter.get(
 );
 
 secureNoteRouter.get(
-  "/securenotes/:id",
+  "/securenote/:id",
   validateHeaderSchema(tokenSchema),
   isAuthenticated,
   getSecureNote
 );
 
 secureNoteRouter.delete(
-  "/securenotes/:id",
+  "/securenote/:id",
   validateHeaderSchema(tokenSchema),
   isAuthenticated,
   deleteSecureNote

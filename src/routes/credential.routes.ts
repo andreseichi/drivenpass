@@ -31,14 +31,14 @@ credentialRouter.get(
 );
 
 credentialRouter.get(
-  "/credentials/:id",
+  "/credential/:id",
   validateHeaderSchema(tokenSchema),
   isAuthenticated,
   getCredential
 );
 
 credentialRouter.delete(
-  "/credentials/:id",
+  "/credential/:id",
   validateHeaderSchema(tokenSchema),
   isAuthenticated,
   deleteCredential
