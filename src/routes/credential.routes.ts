@@ -1,5 +1,8 @@
 import { Router } from "express";
-import { createCredential } from "../controllers/credentialController";
+import {
+  createCredential,
+  getUserCredentials,
+} from "../controllers/credentialController";
 import {
   validateHeaderSchema,
   validateSchema,
@@ -16,6 +19,13 @@ credentialRouter.post(
   validateHeaderSchema(tokenSchema),
   isAuthenticated,
   createCredential
+);
+
+credentialRouter.get(
+  "/credentials",
+  validateHeaderSchema(tokenSchema),
+  isAuthenticated,
+  getUserCredentials
 );
 
 export { credentialRouter };

@@ -14,3 +14,15 @@ export async function insert(credential: CredentialInsertData) {
 
   return result;
 }
+
+export async function findByEmail(email: string) {
+  const result = await prisma.credentials.findMany({
+    where: {
+      User: {
+        email,
+      },
+    },
+  });
+
+  return result;
+}
