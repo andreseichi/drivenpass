@@ -2,11 +2,11 @@ import jwt from "jsonwebtoken";
 import dotenv from "dotenv";
 dotenv.config();
 
-import { User } from "../types/users";
+import { UserToken } from "../types/users";
 
-export function generateAccessToken(email: string) {
-  return jwt.sign({ email }, String(process.env.JWT_ACESS_SECRET), {
-    expiresIn: "15m",
+export function generateAccessToken(user: UserToken) {
+  return jwt.sign({ user }, String(process.env.JWT_ACCESS_SECRET), {
+    expiresIn: 60 * 60 * 24, // 1 day
   });
 }
 
