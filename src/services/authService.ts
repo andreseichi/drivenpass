@@ -11,7 +11,7 @@ export async function createUser(user: UserInsertData) {
 
   if (!result) {
     throw {
-      type: "USER_ALREADY_EXISTS",
+      type: "CONFLICT",
       message: "User already exists",
     };
   }
@@ -22,7 +22,7 @@ export async function signinService(user: UserInsertData) {
 
   if (!userDB) {
     throw {
-      type: "INVALID_LOGIN",
+      type: "UNAUTHORIZED",
       message: "email or password is incorrect",
     };
   }
@@ -30,7 +30,7 @@ export async function signinService(user: UserInsertData) {
   const isPasswordMatch = compareSync(user.password, userDB.password);
   if (!isPasswordMatch) {
     throw {
-      type: "INVALID_LOGIN",
+      type: "UNAUTHORIZED",
       message: "email or password is incorrect",
     };
   }
