@@ -1,11 +1,18 @@
 import { Request, Response } from "express";
+import { createCredentialService } from "../services/credentialService";
+import { CredentialData, CredentialInsertData } from "../types/credential";
 
 export async function createCredential(req: Request, res: Response) {
   const payload = res.locals.payload;
-
   const { user } = payload;
+  const { body }: Record<string, CredentialData> = res.locals;
 
-  console.log(user);
+  const credentialInsertData: CredentialInsertData = {
+    ...body,
+    userId: user.id,
+  };
 
-  return res.status(200).send({ message: "ok" });
+  await createCredentialService(credentialInsertData);
+
+  return res.status(201).send({ message: "Credential created" });
 }
