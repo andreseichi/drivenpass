@@ -28,9 +28,9 @@ export async function getUserSecureNotes(req: Request, res: Response) {
   const payload: PayloadToken = res.locals.payload;
   const { user } = payload;
 
-  const userNotes = await getUserSecureNotesService(user.email);
+  const secureNotes = await getUserSecureNotesService(user.email);
 
-  return res.status(200).send({ userNotes });
+  return res.status(200).send({ secureNotes });
 }
 
 export async function getSecureNote(req: Request, res: Response) {
