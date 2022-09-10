@@ -1,6 +1,6 @@
-import { hashSync } from "bcrypt";
-
 import { insert } from "../repositories/credentialRepository";
+import { encrypt } from "../utils/hash";
+
 import { CredentialInsertData } from "../types/credential";
 
 export async function createCredentialService(
@@ -8,7 +8,7 @@ export async function createCredentialService(
 ) {
   const credentialDataInsert = {
     ...credentialData,
-    password: hashSync(credentialData.password, 10),
+    password: encrypt(credentialData.password),
   };
 
   const result = await insert(credentialDataInsert);
