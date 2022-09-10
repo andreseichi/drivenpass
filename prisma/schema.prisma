@@ -67,11 +67,11 @@ model Cards {
   title           String   @db.VarChar(50)
   number          String   @db.VarChar(16)
   placeholderName String
-  securityCode    String   @db.VarChar(3)
+  securityCode    String
   expirationDate  String   @db.VarChar(5)
   password        String
   isVirtual       Boolean  @default(false)
-  type            cardType @default(CREDIT)
+  type            cardType @default(credit)
   createdAt       DateTime @default(now())
   updatedAt       DateTime @updatedAt
 
@@ -104,9 +104,9 @@ model Documents {
 }
 
 enum cardType {
-  CREDIT
-  DEBIT
-  BOTH
+  credit
+  debit
+  both
 }
 
 enum documentType {
