@@ -29,9 +29,9 @@ export async function getUserCredentialsService(email: string) {
   const credentials = await findByEmail(email);
 
   const credentialsData = credentials.map((credential) => {
-    const { id, title, url, username, password } = credential;
+    const { id, title, url, username, password, createdAt } = credential;
     const passwordDecrypted = decrypt(password);
-    return { id, title, url, username, password: passwordDecrypted };
+    return { id, title, url, username, password: passwordDecrypted, createdAt };
   });
 
   return credentialsData;
@@ -53,6 +53,7 @@ export async function getCredentialService(id: number, email: string) {
     url: credential.url,
     username: credential.username,
     password: passwordDecrypted,
+    createdAt: credential.createdAt,
   };
 
   return credentialData;
