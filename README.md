@@ -17,7 +17,7 @@
     <img alt="Last commit" src="https://img.shields.io/github/last-commit/andreseichi/drivenpass?style=for-the-badge" />
   </a>
 </div>
-​
+
 <br/>
 
 # Description
@@ -32,7 +32,7 @@ API to secure your secret informations and passwords and manage all of them very
 -   Create / Visualize / Delete Credit cards
 -   Create / Visualize / Delete Networks
 -   Create / Visualize / Delete Personal documents
-​
+
 ## API Documentation
 
 ### Authentication
@@ -53,8 +53,6 @@ POST /signup
 ###
 
 `Password should be at least 10 characters long`
-
-<br/>
 
 #### Sign in
 
@@ -98,13 +96,13 @@ POST /credential/create
 `Authentication should be "Bearer + JWT"`
 
 #####
-​
+
 | Body             | Type     | Description                        |
 | :--------------- | :------- | :--------------------------------- |
 | `title`       | `string` | **Required**. Title of the credential  |
 | `url`         | `string` | **Required**. URL of credential          |
 | `username` | `string` | **Required**. Username of that credential |
 | `password`       | `string` | **Required**. Password of that credential   |
-​
+
 #
 ​
