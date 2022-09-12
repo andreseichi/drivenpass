@@ -1,4 +1,4 @@
-import { Router } from "express";
+import { Request, Response, Router } from "express";
 
 import { authRouter } from "./auth.routes";
 import { cardRouter } from "./card.routes";
@@ -8,6 +8,10 @@ import { networkRouter } from "./network.routes";
 import { secureNoteRouter } from "./secureNote.routes";
 
 const router = Router();
+
+router.get("/", (req: Request, res: Response) => {
+  return res.status(200).send({ message: "Welcome to the API" });
+});
 
 router.use(authRouter);
 router.use(credentialRouter);
